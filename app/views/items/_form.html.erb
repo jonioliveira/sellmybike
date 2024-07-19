@@ -1,4 +1,4 @@
-<%= form_with(model: item, class: "contents") do |form| %>
+<%= form_with(model: item, class: "contents", local: true, multipart: true) do |form| %>
   <% if item.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -22,6 +22,14 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :item_type %>
+    <%= form.select :item_type, 
+    options_for_select(Item.item_types.map {|key, value| [key.titleize, Item.item_types.key(value)]}, @item.item_type), 
+    {}, 
+    class: "block apperance-none w-full bg-white border border-gray-400 hover:border-gray-500 rounded rounded-md px-3 py-2 mt-2 shadow focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :brand %>
     <%= form.text_field :brand, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
@@ -37,8 +45,8 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :item_type %>
-    <%= form.text_field :item_type, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :files %>
+    <%= form.file_field :files, multiple: true, size: 5, accept: 'image/jpeg,image/png', class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

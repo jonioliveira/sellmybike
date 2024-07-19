@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class ShopsController < ApplicationController
-  before_action :set_shop, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops or /shops.json
   def index
@@ -25,11 +28,11 @@ class ShopsController < ApplicationController
 
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to shop_url(@shop), notice: "Shop was successfully created." }
-        format.json { render :show, status: :created, location: @shop }
+        format.html { redirect_to(shop_url(@shop), notice: "Shop was successfully created.") }
+        format.json { render(:show, status: :created, location: @shop) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @shop.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -38,11 +41,11 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to shop_url(@shop), notice: "Shop was successfully updated." }
-        format.json { render :show, status: :ok, location: @shop }
+        format.html { redirect_to(shop_url(@shop), notice: "Shop was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @shop) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @shop.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -52,19 +55,20 @@ class ShopsController < ApplicationController
     @shop.destroy!
 
     respond_to do |format|
-      format.html { redirect_to shops_url, notice: "Shop was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(shops_url, notice: "Shop was successfully destroyed.") }
+      format.json { head(:no_content) }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shop
-      @shop = Shop.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def shop_params
-      params.require(:shop).permit(:name, :description, :location, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shop
+    @shop = Shop.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def shop_params
+    params.require(:shop).permit(:name, :description, :location, :email)
+  end
 end

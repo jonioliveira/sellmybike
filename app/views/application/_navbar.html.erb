@@ -3,25 +3,42 @@
       class="mr-4 block cursor-pointer py-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased">
       SellMyBike.com
   </a>
-    
-  <!-- Search Box -->
-  <div class="flex items-center">
-    <%= form_with url: "", method: :get, class: "flex items-center" do %>
-        <input id="search-field" type="text" name="query" placeholder="Search..." class="px-2 py-2 border-slate-200 rounded-md focus:border-slate-400 focus:ring-0">
-    <% end %>
-  </div>
 
-  <!-- User Email and Dropdown -->
-  <div class="flex items-center space-x-4">
-      <div class="border-r border-gray-300 h-6"></div>
-      <div class="relative">
-          <button id="userMenuButton" class="flex items-center space-x-2 focus:outline-none">
-              <span class="text-gray-700">joni@sellmybike.com</span>
-              <%= heroicon "chevron-down", variant: :outline,  options: { class: "stroke-1 stroke-gray-600 w-5 h-5" } %>
-          </button>
-          <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden">
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
-          </div>
-      </div>
+  <div class="flex">
+    <!-- Search Box -->
+    <div class="flex items-center">
+        <%= form_with url: search_path, method: :get, class: "flex items-center" do %>
+            <%= heroicon "magnifying-glass", variant: :outline,  options: { class: "stroke-1 stroke-gray-600 w-5 h-5" } %>
+            <input id="search-field" type="text" name="query" placeholder="Search..." class="px-2 py-2 border-transparent focus:border-transparent focus:ring-0">
+        <% end %>
+    </div>
+
+    <%= link_to "New Sell", new_item_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+
+
+    <!-- User Email and Dropdown -->
+    <div class="flex items-center space-x-4 px-4">
+        <div class="border-r border-gray-300 h-6"></div>
+        <% if user_signed_in? %>
+        <div data-controller="user-dropdown">
+            <div>
+                <button type="button" data-action="user-dropdown#toggle click@window->dropdown#hide" 
+                    class="flex text-sm font-medium text-gray-700 hover:bg-gray-50"
+                <span class="text-gray-700"><%= current_user.email %></span>
+                <%= heroicon "chevron-down", variant: :outline,  options: { class: "stroke-1 stroke-gray-600 w-5 h-5" } %>
+                </button>
+            </div>
+              <div data-user-dropdown-target="menu" class="absolute border shadow shadow-xl rounded rounded-md mt-2">
+                    <div  class="py-1">
+                        <a href="#" data-action="user-dropdown#toggle" class="bg-gray-100 text-gray-900 block px-4 py-2 text-sm">Account settings</a>
+                        <a href="#" data-action="user-dropdown#toggle" class="block text-gray-900 px-4 py-2 text-sm">Items List</a>
+                        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "block text-gray-900 px-4 py-2 text-sm" %>
+                    </div>
+                </div>
+        </div>
+        <% else %>
+            <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:bg-gray-50" %>
+        <% end %>
+    </div>
   </div>
 </nav>
