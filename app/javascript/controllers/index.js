@@ -4,8 +4,5 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import UserDropdownController from "./user_dropdown_controller"
 application.register("user-dropdown", UserDropdownController)

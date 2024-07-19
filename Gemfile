@@ -16,7 +16,7 @@ gem "puma", ">= 5.0"
 gem "pagy", "~> 8.4"
 gem "ransack", "~> 4.1"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
-gem "sprockets-rails"
+gem "propshaft"
 gem "stimulus-rails"
 gem "sentry-rails"
 gem "tailwindcss-rails"
@@ -49,3 +49,5 @@ group :test do
   gem "selenium-webdriver"
 end
 gem "redis"
+
+gem "aws-sdk-s3", "~> 1.156"

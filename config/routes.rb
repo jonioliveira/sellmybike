@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: "home#index"
   resources :items
   resources :shops
   devise_for :users
-  root to: "home#index"
   get "search", to: "search#search"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

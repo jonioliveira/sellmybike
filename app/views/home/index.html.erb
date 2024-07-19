@@ -1,21 +1,16 @@
-<div class="mt-0">
-  <%= render "search" %>
-  <div class="w-screen">
-    <img src="https://picsum.photos/1900/600" />
+<div class="container mt-20 min-w-full">
+
+<!-- Banner with Search Box -->
+  <div class="w-full">
+    <img src="https://picsum.photos/1200/400" alt="Banner" class="w-full h-64 object-cover">
   </div>
-  <div class="container mx-auto mt-8 px-4">
-    <h2 class="text-gray-800 text-3xl font-bold" >Highlights</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-      <% @articles.each do |article| %>
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <img src="<%= article[:image_url] %>" alt="Article Image" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h2 class="text-xl text-gray-800 font-bold mb-2"><%= article[:title] %></h2>
-            <p class="text-gray-600 mb-4"><%= article[:description] %></p>
-            <a href="mailto:<%= article[:email] %>" class="text-blue-500 hover:underline"><%= article[:email] %></a>
-          </div>
-        </div>
-      <% end %>
+
+  <!-- Articles Container -->
+  <div class="container">
+    <div class="grid grid-cols-3">
+      <div>01<div>
+      <div>02<div>
+      <div>03<div>
     </div>
   </div>
 </div>

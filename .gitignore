@@ -36,3 +36,11 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Ignore pnpm files
+/node_modules
+.pnp
+.pnp.js
+
+
+
