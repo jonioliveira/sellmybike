@@ -12,9 +12,14 @@
   </head>
 
   <body>
-    <%= render "navbar"%>
-    <main class="mt-28">
+    <% unless login_page? %>
+      <%= render "navbar"%>
+    <% end %>
+    <main>
       <%= yield %>
     </main>
+    <% unless login_page? %>
+      <%= render "footer"%>
+    <% end %>
   </body>
 </html>
