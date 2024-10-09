@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_153721) do
     t.string "item_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand", "model", "year", "item_type"], name: "index_items_on_brand_and_model_and_year_and_item_type", unique: true
   end
 
   create_table "prices", force: :cascade do |t|
@@ -68,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_153721) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_shops_on_email", unique: true
   end
 
   create_table "user_items", force: :cascade do |t|

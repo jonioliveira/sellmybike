@@ -8,6 +8,5 @@ class CreatePrices < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_index :prices, :item_id, unique: true
   end
 end
